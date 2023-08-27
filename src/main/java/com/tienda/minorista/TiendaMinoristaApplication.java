@@ -16,6 +16,8 @@ public class TiendaMinoristaApplication {
 		SpringApplication.run(TiendaMinoristaApplication.class, args);
 	}
 
+	//Configuracion de cors tomado de: https://github.com/getarrays/employeemanager.git
+	//Del tutorial https://youtu.be/Gx4iBLKLVHk
 	@Bean
 	public CorsFilter corsFilter() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
