@@ -20,6 +20,12 @@ public class ProductoService {
 		return productoRepository.findAll();
 	}
 
+	public Producto getProducto(long idProducto) {
+		Producto producto = productoRepository.findById(idProducto)
+				.orElseThrow(() -> new IllegalStateException("No existe el producto con id " + idProducto));
+		return producto;
+	}
+	
 	public void agregarProducto(Producto producto) {
 		productoRepository.save(producto);
 	}
@@ -31,8 +37,9 @@ public class ProductoService {
 	}
 
 	@Transactional
-	public void actualizarProducto(Producto productoActualizado) {
-		Producto productoGuardado = productoRepository.findById(productoActualizado.getIdProducto())
+	public void actualizarProducto(long idProducto, Producto productoActualizado) {
+		
+		Producto productoGuardado = productoRepository.findById(idProducto)
 				.orElseThrow(() -> new IllegalStateException(
 						"No existe el producto con id " + productoActualizado.getIdProducto()
 						));

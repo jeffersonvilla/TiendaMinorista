@@ -80,19 +80,21 @@ public class Producto {
 	}
 
 	public float getPrecio() {
-		return precio;
+		if(this.precio == null) return -1;
+		return precio.floatValue();
 	}
 
 	public void setPrecio(float precio) {
-		this.precio = precio;
+		this.precio = Float.valueOf(precio);
 	}
 
 	public int getCantidadDisponible() {
-		return cantidadDisponible;
+		if(this.cantidadDisponible == null) return -1;
+		return cantidadDisponible.intValue();
 	}
 
 	public void setCantidadDisponible(int cantidadDisponible) {
-		this.cantidadDisponible = cantidadDisponible;
+		this.cantidadDisponible = Integer.valueOf(cantidadDisponible);
 	}
 
 	public String getMarca() {

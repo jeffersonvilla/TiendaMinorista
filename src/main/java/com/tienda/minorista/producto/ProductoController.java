@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping(path = "api/v1/producto")
@@ -25,17 +26,28 @@ public class ProductoController {
 
 	@GetMapping
 	public List<Producto> getProductos(){
-		return productoService.getAllProductos();
+		return productoService.getAllProductos(); 
+	}
+	
+	@GetMapping(path = "/{idProducto}")
+	public Producto getProducto(@PathVariable(name = "idProducto") long idProducto) {
+		return productoService.getProducto(idProducto);
 	}
 	
 	@PostMapping
-	public void agregarProducto(@Valid @RequestBody Producto producto) {
+	public void agregarProducto(@Valid @NotNull @RequestBody Producto producto) {
 		productoService.agregarProducto(producto);
 	}
 	
-	@PutMapping()
-	public void actualizarProducto(@RequestBody Producto producto) {
-		productoService.actualizarProducto(producto);
+	@PutMapping(path="/actualizar/{idProducto}")
+	public void actualizarProducto(@PathVariable(name = "idProducto") long idProducto, 
+			@Valid @NotNull @RequestBody Producto producto) {
+		
+		try {
+			productoService.actualizarProducto(idProducto, producto);
+		}catch(IllegalStateException e){
+			//TODO: return appropiate status code
+		}
 	}
 	
 	@DeleteMapping(path = "/eliminar/{idProducto}")
