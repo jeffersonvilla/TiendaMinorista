@@ -1,11 +1,12 @@
 package com.tienda.minorista.producto;
 
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "producto")
@@ -15,20 +16,20 @@ public class Producto {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idProducto;
 	
-	@Nonnull
+	@NotBlank(message = "El nombre del producto es obligatorio")
 	private String nombre;
 	
-	@Nonnull
+	@NotBlank(message = "La marca del producto es obligatoria")
 	private String marca;
 	
-	@Nonnull
+	@NotBlank(message = "La descripcion del producto es obligatoria")
 	private String descripcion;
 	
-	@Nonnull
-	private float precio = -1;
+	@NotNull(message = "El precio del producto es obligatorio")
+	private Float precio;
 	
-	@Nonnull
-	private int cantidadDisponible = -1;
+	@NotNull(message = "La cantidad disponible del producto es obligatoria")
+	private Integer cantidadDisponible;
 
 	public Producto() {
 		super();
